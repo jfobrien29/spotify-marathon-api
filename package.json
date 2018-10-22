@@ -4,10 +4,10 @@
   "description": "Server to interact with spotify",
   "main": "index.js",
   "scripts": {
-    "build": "npm run lint",
+    "build": "tsc tsconfig.json",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "dev": "nodemon --watch 'src' --exec 'ts-node --require dotenv/config' src/index.ts",
-    "start": "ts-node --require dotenv/config src/index.ts",
+    "start": "ts-node src/index.ts",
     "test": "LOG_SILENT=true mocha --require ts-node/register --watch-extensions ts 'src/**/*spec.ts'",
     "compile": "npm run build && tsc -p tsconfig.json"
   },
@@ -41,6 +41,7 @@
     "travis": "^0.1.1",
     "winston": "^2.4.1",
     "xmlhttprequest": "^1.8.0",
+    "ts-node": "^5.0.1",
     "typescript": "^2.9.2"
   },
   "devDependencies": {
@@ -58,7 +59,6 @@
     "sinon": "^4.5.0",
     "source-map-support": "^0.5.4",
     "supertest": "^3.0.0",
-    "ts-node": "^5.0.1",
     "tslint": "^5.9.1"
   }
 }
