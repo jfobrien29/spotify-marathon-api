@@ -7,7 +7,7 @@
     "build": "npm run lint",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "dev": "nodemon --watch 'src' --exec 'ts-node --require dotenv/config' src/index.ts",
-    "start": "npm run build && ts-node --require dotenv/config src/index.ts",
+    "start": "ts-node --require dotenv/config src/index.ts",
     "test": "LOG_SILENT=true mocha --require ts-node/register --watch-extensions ts 'src/**/*spec.ts'",
     "compile": "npm run build && tsc -p tsconfig.json"
   },
