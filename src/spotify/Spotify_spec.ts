@@ -1,13 +1,12 @@
-// import * as supertest from 'supertest';
-// import { expect } from 'chai';
-// import * as sinon from 'sinon';
-// import { describe } from 'mocha';
+import * as supertest from 'supertest';
+import { expect } from 'chai';
+import * as sinon from 'sinon';
+import { describe } from 'mocha';
 
 
-// describe('Component tests', () => {
+describe('Spotify Component tests', () => {
+    describe('Spotify Service Tests', () => {
 
-//     describe('Service Tests', () => {
 
-//         });
-//     });
-// });
+    });
+});

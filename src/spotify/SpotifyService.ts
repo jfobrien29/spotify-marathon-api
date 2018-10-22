@@ -47,7 +47,7 @@ export class SpotifyService {
                 </html>`);
             }
             else {
-                throw new Error(error);
+                res.status(response.statusCode).send(error);
             }
         }
 
