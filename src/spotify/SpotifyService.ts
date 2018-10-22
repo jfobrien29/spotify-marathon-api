@@ -37,14 +37,14 @@ export class SpotifyService {
             const numArtists = data.item.artists.length;
 
             logger.info('Returning Current Session Info');
-
             return`<html>
             <body>
             <h2>Current Spotify Session</h2>
             <h2>Song: ${song} </h2>
             <h2>Artist${(numArtists > 1) ? 's' : ''}: ${artists}</h2>
             <img src="${artImage}" alt="Album Art" width="300" height="300">
-            <p><a href=${data.item.external_urls.spotify}>Listen to this song!</p>
+            <p><a href=${data.item.external_urls.spotify}>Listen to this song on the Internet!</p>
+            <p><a href=${data.item.uri}>Open this song in Spotify!</p>
             </body>
             </html>`;
     }
