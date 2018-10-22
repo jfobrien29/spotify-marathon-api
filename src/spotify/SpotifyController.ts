@@ -1,4 +1,5 @@
 import SpotifyService from './SpotifyService';
+import { config } from '../config';
 
 // NOTE: This class is used for validation and response protocol for various endpoints
 class SpotifyController {
@@ -9,8 +10,7 @@ class SpotifyController {
 
     public getCurrentSession = async (req, res) => {
         try {
-            const session = await SpotifyService.getSession();
-            res.status(200).send(session);
+            await SpotifyService.getSession(req, res, config.TOKEN);
         }
         catch (err) {
             res.status(500).send(err);

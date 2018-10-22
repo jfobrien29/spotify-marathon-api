@@ -7,6 +7,7 @@ const config = {
         LEVEL: process.env.LOG_LEVEL || 'debug',
         SILENT: process.env.LOG_SILENT || false
     },
+    TOKEN: process.env.TOKEN || 'token',
     DB: {
         ACCOUNT: process.env.DB_ACCOUNT || 'account',
         PASSWORD: process.env.DB_PASSWORD || 'password'
