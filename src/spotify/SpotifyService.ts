@@ -1,7 +1,8 @@
 import { logger } from '../config/logger';
+import { config } from '../config';
+const request = require('request-promise-native');
 const SHA256 = require('crypto-js/sha256');
 const faker = require('faker');
-const request = require('request');
 
 
 export class SpotifyService {
@@ -10,7 +11,7 @@ export class SpotifyService {
      * Query Services
      *************************************************************/
 
-    async getSession(req, res, auth): Promise<any> {
+    async getSession(auth): Promise<any> {
         const headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -22,36 +23,55 @@ export class SpotifyService {
             headers: headers
         };
 
-        function callback(error, response, body) {
-            if (!error && response.statusCode == 200) {
-                const data = JSON.parse(body);
+        const response = await request(options);
+        const data = JSON.parse(response);
+        return this.createResponseWithData(data);
+    }
 
-                const song = data.item.name;
-                const artImage = data.item.album.images[0].url;
-                const artists = data.item.artists.reduce((artistString, currArtist, index) => {
-                    return (index === 0 ) ? currArtist.name : artistString + ', ' + currArtist.name;
-                }, '');
-                const numArtists = data.item.artists.length;
+    createResponseWithData(data) {
+            const song = data.item.name;
+            const artImage = data.item.album.images[0].url;
+            const artists = data.item.artists.reduce((artistString, currArtist, index) => {
+                return (index === 0) ? currArtist.name : artistString + ', ' + currArtist.name;
+            }, '');
+            const numArtists = data.item.artists.length;
 
-                logger.info('Returning Current Session Info');
-                res.send(`
-                <html>
-                <body>
+            logger.info('Returning Current Session Info');
 
-                <h2>Current Spotify Session</h2>
-                <h2>Song: ${song} </h2>
-                <h2>Artist${(numArtists > 1) ? 's' : ''}: ${artists}</h2>
-                <img src="${artImage}" alt="Album Art" width="300" height="300">
-                <p><a href=${data.item.external_urls.spotify}>Listen to this song!</p>
-                </body>
-                </html>`);
-            }
-            else {
-                res.status(response.statusCode).send(error);
-            }
-        }
+            return`<html>
+            <body>
+            <h2>Current Spotify Session</h2>
+            <h2>Song: ${song} </h2>
+            <h2>Artist${(numArtists > 1) ? 's' : ''}: ${artists}</h2>
+            <img src="${artImage}" alt="Album Art" width="300" height="300">
+            <p><a href=${data.item.external_urls.spotify}>Listen to this song!</p>
+            </body>
+            </html>`;
+    }
 
-        request(options, callback);
+    async getNewAccessToken(): Promise<any> {
+        // requesting access token from refresh token
+        const refresh_token = config.RTOKEN;
+        const cid = config.SPOTIFY_CLIENT_ID;
+        const cs = config.SPOTIFY_CLIENT_SECRET;
+
+        const authOptions = {
+            url: 'https://accounts.spotify.com/api/token',
+            headers: {
+                'Authorization': 'Basic ' + (new Buffer(cid + ':' + cs).toString('base64'))
+            },
+            form: {
+                grant_type: 'refresh_token',
+                refresh_token: refresh_token
+            },
+            json: true
+        };
+
+        const resp = await request.post(authOptions);
+        logger.debug(JSON.stringify(resp, undefined, 2));
+        const access_token = resp.access_token;
+        config.TOKEN = resp.access_token;
+        return access_token;
     }
 }
 

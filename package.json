@@ -7,7 +7,7 @@
     "build": "tsc tsconfig.json",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "dev": "nodemon --watch 'src' --exec 'ts-node --require dotenv/config' src/index.ts",
-    "start": "ts-node src/index.ts",
+    "start": "ts-node --require dotenv/config src/index.ts",
     "test": "LOG_SILENT=true mocha --require ts-node/register --watch-extensions ts 'src/**/*spec.ts'",
     "compile": "npm run build && tsc -p tsconfig.json"
   },
@@ -38,11 +38,12 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "request": "^2.88.0",
+    "request-promise-native": "^1.0.5",
     "travis": "^0.1.1",
-    "winston": "^2.4.1",
-    "xmlhttprequest": "^1.8.0",
     "ts-node": "^5.0.1",
-    "typescript": "^2.9.2"
+    "typescript": "^2.9.2",
+    "winston": "^2.4.1",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.1",

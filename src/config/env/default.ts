@@ -8,10 +8,13 @@ const config = {
         SILENT: process.env.LOG_SILENT || false
     },
     TOKEN: process.env.TOKEN || 'token',
+    RTOKEN: process.env.RTOKEN || 'rt',
     DB: {
         ACCOUNT: process.env.DB_ACCOUNT || 'account',
         PASSWORD: process.env.DB_PASSWORD || 'password'
-    }
+    },
+    SPOTIFY_CLIENT_ID: process.env.CLIENT_ID || 'N/A',
+    SPOTIFY_CLIENT_SECRET: process.env.CLIENT_SECRET || 'N/A'
 };
 
 export { config as defaultConfig };
