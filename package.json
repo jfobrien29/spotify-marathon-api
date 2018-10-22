@@ -40,7 +40,8 @@
     "request": "^2.88.0",
     "travis": "^0.1.1",
     "winston": "^2.4.1",
-    "xmlhttprequest": "^1.8.0"
+    "xmlhttprequest": "^1.8.0",
+    "typescript": "^2.9.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.1",
@@ -58,7 +59,6 @@
     "source-map-support": "^0.5.4",
     "supertest": "^3.0.0",
     "ts-node": "^5.0.1",
-    "tslint": "^5.9.1",
-    "typescript": "^2.7.2"
+    "tslint": "^5.9.1"
   }
 }
