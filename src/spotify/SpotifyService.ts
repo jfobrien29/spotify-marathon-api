@@ -53,13 +53,13 @@ export class SpotifyService {
             return `<html>
             <body>
             <h2>
-                <img src="http://www.animatedimages.org/data/media/102/animated-music-image-0046.gif">
                 Jack Is Listening To Music!
-                <img src="http://www.animatedimages.org/data/media/102/animated-music-image-0046.gif">
             </h2>
             <h2>Song: ${song} </h2>
             <h2>Artist${(numArtists > 1) ? 's' : ''}: ${artists}</h2>
-            <img src="${artImage}" alt="Album Art" width="300" height="300">
+
+            <img src="${artImage}" alt="Album Art" width="400" height="400">
+
             <p>Song is <b>${this.msToMinSec(progress)}</b> of <b>${this.msToMinSec(duration)}</b> complete.</p>
             <p><a href=${data.item.external_urls.spotify}>Listen to this song in your browser!</p>
             <p><a href=${data.item.uri}>Open this song in Spotify!</p>
