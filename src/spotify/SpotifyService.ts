@@ -14,23 +14,15 @@ export class SpotifyService {
      *************************************************************/
 
     async getSessionData(auth): Promise<any> {
-        const headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': ('Bearer ' + auth)
-        };
-
-        const options = {
-            url: 'https://api.spotify.com/v1/me/player/currently-playing',
-            headers: headers
-        };
-
         const response = await SpotifyHelper.getCurrentlyPlaying(auth);
         if (!response) {
             return 'Not Playing';
         }
         else {
-            return JSON.parse(response);
+            const data = JSON.parse(response);
+            const reviewData = songReviews[data.item.id];
+            data.review = (reviewData) ? reviewData.review : '';
+            return data;
         }
     }
 
@@ -49,8 +41,7 @@ export class SpotifyService {
             const numArtists = data.item.artists.length;
             const progress = data.progress_ms;
             const duration = data.item.duration_ms;
-            const reviewData = songReviews[data.item.id];
-            const review = (reviewData) ? reviewData.review : '';
+            const review = data.review;
 
             logger.info('Returning Current Session Info');
             return `<html>
