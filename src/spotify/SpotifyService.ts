@@ -1,5 +1,6 @@
 import { logger } from '../config/logger';
 import { config } from '../config';
+import SpotifyHelper from '../gateways/SpotifyGateway';
 const request = require('request-promise-native');
 const SHA256 = require('crypto-js/sha256');
 const faker = require('faker');
@@ -23,7 +24,7 @@ export class SpotifyService {
             headers: headers
         };
 
-        const response = await request(options);
+        const response = await SpotifyHelper.getCurrentlyPlaying(auth);
         if (!response) {
             return 'Not Playing';
         }
@@ -45,15 +46,22 @@ export class SpotifyService {
                 return (index === 0) ? currArtist.name : artistString + ', ' + currArtist.name;
             }, '');
             const numArtists = data.item.artists.length;
+            const progress = data.progress_ms;
+            const duration = data.item.duration_ms;
 
             logger.info('Returning Current Session Info');
             return `<html>
             <body>
-            <h2>Jack is Listening to Music!</h2>
+            <h2>
+                <img src="http://www.animatedimages.org/data/media/102/animated-music-image-0046.gif">
+                Jack Is Listening To Music!
+                <img src="http://www.animatedimages.org/data/media/102/animated-music-image-0046.gif">
+            </h2>
             <h2>Song: ${song} </h2>
             <h2>Artist${(numArtists > 1) ? 's' : ''}: ${artists}</h2>
             <img src="${artImage}" alt="Album Art" width="300" height="300">
-            <p><a href=${data.item.external_urls.spotify}>Listen to this song on the Internet!</p>
+            <p>Song is <b>${this.msToMinSec(progress)}</b> of <b>${this.msToMinSec(duration)}</b> complete.</p>
+            <p><a href=${data.item.external_urls.spotify}>Listen to this song in your browser!</p>
             <p><a href=${data.item.uri}>Open this song in Spotify!</p>
             </body>
             </html>`;
@@ -61,10 +69,17 @@ export class SpotifyService {
         else {
             return `<html>
             <body>
-            <h2>Jack is <em>Not</em> Listening to Music!</h2>
+            <h2>Jack Is <em>Not</em> Currently Listening To Music!</h2>
             </body>
             </html>`;
         }
+    }
+
+    msToMinSec(ms) {
+        const s = Math.floor(ms / 1000);
+        const seconds = s % 60;
+        const min = Math.floor(s / 60);
+        return `${min}:${(seconds < 10) ? '0' + seconds : seconds}`;
     }
 
     async getNewAccessToken(): Promise<any> {
