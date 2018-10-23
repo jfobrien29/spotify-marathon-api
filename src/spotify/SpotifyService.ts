@@ -1,5 +1,6 @@
 import { logger } from '../config/logger';
 import { config } from '../config';
+import { songReviews } from './SongReviews';
 import SpotifyHelper from '../gateways/SpotifyGateway';
 const request = require('request-promise-native');
 const SHA256 = require('crypto-js/sha256');
@@ -48,6 +49,8 @@ export class SpotifyService {
             const numArtists = data.item.artists.length;
             const progress = data.progress_ms;
             const duration = data.item.duration_ms;
+            const reviewData = songReviews[data.item.id];
+            const review = (reviewData) ? reviewData.review : '';
 
             logger.info('Returning Current Session Info');
             return `<html>
@@ -59,7 +62,7 @@ export class SpotifyService {
             <h2>Artist${(numArtists > 1) ? 's' : ''}: ${artists}</h2>
 
             <img src="${artImage}" alt="Album Art" width="400" height="400">
-
+            ${(review === '') ? '<p>This song hasn\'t been reviewed.</p>' : '<p> My Thoughts: <b>"' + review + '"</b></p>'}
             <p>Song is <b>${this.msToMinSec(progress)}</b> of <b>${this.msToMinSec(duration)}</b> complete.</p>
             <p><a href=${data.item.external_urls.spotify}>Listen to this song in your browser!</p>
             <p><a href=${data.item.uri}>Open this song in Spotify!</p>
