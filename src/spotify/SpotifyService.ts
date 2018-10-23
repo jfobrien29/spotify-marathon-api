@@ -11,7 +11,7 @@ export class SpotifyService {
      * Query Services
      *************************************************************/
 
-    async getSession(auth): Promise<any> {
+    async getSessionData(auth): Promise<any> {
         const headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -24,11 +24,21 @@ export class SpotifyService {
         };
 
         const response = await request(options);
-        const data = JSON.parse(response);
+        if (!response) {
+            return 'Not Playing';
+        }
+        else {
+            return JSON.parse(response);
+        }
+    }
+
+    async getSession(auth): Promise<any> {
+        const data = await this.getSessionData(auth);
         return this.createResponseWithData(data);
     }
 
     createResponseWithData(data) {
+        if (data != 'Not Playing') {
             const song = data.item.name;
             const artImage = data.item.album.images[0].url;
             const artists = data.item.artists.reduce((artistString, currArtist, index) => {
@@ -37,9 +47,9 @@ export class SpotifyService {
             const numArtists = data.item.artists.length;
 
             logger.info('Returning Current Session Info');
-            return`<html>
+            return `<html>
             <body>
-            <h2>Current Spotify Session</h2>
+            <h2>Jack is Listening to Music!</h2>
             <h2>Song: ${song} </h2>
             <h2>Artist${(numArtists > 1) ? 's' : ''}: ${artists}</h2>
             <img src="${artImage}" alt="Album Art" width="300" height="300">
@@ -47,6 +57,14 @@ export class SpotifyService {
             <p><a href=${data.item.uri}>Open this song in Spotify!</p>
             </body>
             </html>`;
+        }
+        else {
+            return `<html>
+            <body>
+            <h2>Jack is <em>Not</em> Listening to Music!</h2>
+            </body>
+            </html>`;
+        }
     }
 
     async getNewAccessToken(): Promise<any> {
