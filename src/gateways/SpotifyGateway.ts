@@ -24,6 +24,54 @@ export class SpotifyHelper {
         return response;
     }
 
+    public async getPlaylist(auth: string): Promise<any> {
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': ('Bearer ' + auth)
+        };
+
+        const options = {
+            url: 'https://api.spotify.com/v1/playlists/2JUf2gUEcVwxOue6vaASwa',
+            headers: headers
+        };
+
+        const response = await request(options);
+        return response;
+    }
+
+    public async getLastPlayed(auth: string): Promise<any> {
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': ('Bearer ' + auth)
+        };
+
+        const options = {
+            url: 'https://api.spotify.com/v1/me/player/recently-played?limit=1',
+            headers: headers
+        };
+
+        const response = await request(options);
+        return response;
+    }
+
+    public async getCurrentDevice(auth: string): Promise<any> {
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': ('Bearer ' + auth)
+        };
+
+        const options = {
+            url: 'https://api.spotify.com/v1/me/player/devices',
+            headers: headers
+        };
+
+        const response = await request(options);
+        return response;
+    }
+
     public async getNewAccessToken(): Promise<any> {
         // requesting access token from refresh token
         const refresh_token = config.RTOKEN;
