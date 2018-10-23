@@ -13,7 +13,7 @@ app.use(cors());
 
 require('./spotify/SpotifyRoutes')(app);
 
-app.get('/', (req, res) => res.status(200).json({message: `Application is running on ${config.PORT} in ${config.ENV}`}));
+app.get('/status', (req, res) => res.status(200).json({message: `Application is running on ${config.PORT} in ${config.ENV}`}));
 
 app.use((req, res, next) => {
     res.status(404)
