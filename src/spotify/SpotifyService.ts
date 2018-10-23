@@ -53,7 +53,7 @@ export class SpotifyService {
             return `<html>
             <body>
             <h2>
-                Jack Is Listening To Music!
+                Jack Is Listening To Music! <img src="https://kylekeech.com/wp-content/uploads/2016/01/bars1.gif" width="15" height="15">
             </h2>
             <h2>Song: ${song} </h2>
             <h2>Artist${(numArtists > 1) ? 's' : ''}: ${artists}</h2>
