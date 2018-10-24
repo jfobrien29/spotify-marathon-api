@@ -3,7 +3,6 @@ import { logger } from '../config/logger';
 const request = require('request-promise-native');
 
 export class SpotifyHelper {
-
     /**************************************************************
      * API Calls
      *************************************************************/

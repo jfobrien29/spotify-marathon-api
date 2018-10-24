@@ -16,12 +16,13 @@ export class SpotifyService {
     async getSessionData(auth): Promise<any> {
         const response = await SpotifyHelper.getCurrentlyPlaying(auth);
         if (!response) {
-            return 'Not Playing';
+            return {isPlaying: false};
         }
         else {
             const data = JSON.parse(response);
             const reviewData = songReviews[data.item.id];
             data.review = (reviewData) ? reviewData.review : '';
+            data.isPlaying = true;
             return data;
         }
     }
@@ -32,7 +33,7 @@ export class SpotifyService {
     }
 
     createResponseWithData(data) {
-        if (data != 'Not Playing') {
+        if (data.isPlaying) {
             const song = data.item.name;
             const artImage = data.item.album.images[0].url;
             const artists = data.item.artists.reduce((artistString, currArtist, index) => {
