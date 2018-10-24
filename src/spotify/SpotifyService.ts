@@ -3,9 +3,6 @@ import { config } from '../config';
 import { songReviews } from './SongReviews';
 import SpotifyHelper from '../gateways/SpotifyGateway';
 const request = require('request-promise-native');
-const SHA256 = require('crypto-js/sha256');
-const faker = require('faker');
-
 
 export class SpotifyService {
 
@@ -30,6 +27,10 @@ export class SpotifyService {
     async getSession(auth): Promise<any> {
         const data = await this.getSessionData(auth);
         return this.createResponseWithData(data);
+    }
+
+    async getLastPlayed(auth): Promise<any> {
+        return await SpotifyHelper.getLastPlayed(auth);
     }
 
     createResponseWithData(data) {

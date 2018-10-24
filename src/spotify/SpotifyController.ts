@@ -43,6 +43,23 @@ class SpotifyController {
         }
     }
 
+    public getLastPlayed = async (req, res) => {
+        try {
+            res.status(200).send(await SpotifyService.getLastPlayed(config.TOKEN));
+        }
+        catch (err) {
+            if (err.statusCode === 401) {
+                logger.info('Getting new Access Token');
+                const token = await SpotifyService.getNewAccessToken();
+                res.status(200).send(await SpotifyService.getLastPlayed(token));
+            }
+            else {
+                logger.debug(err);
+                res.status(500).send(err);
+            }
+        }
+    }
+
     /********************************************
      * POST controllers
      ********************************************/

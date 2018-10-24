@@ -6,4 +6,5 @@ export = (app) => {
 
     app.get(endpoint, SpotifyController.getCurrentSession);
     app.get(endpoint + 'data', SpotifyController.getCurrentSessionData);
+    // app.get(endpoint + 'lastPlayed', SpotifyController.getLastPlayed); // Need to update scope
 };
