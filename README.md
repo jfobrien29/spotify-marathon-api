@@ -1,5 +1,5 @@
 # Spotify API
-API development repository for Spotify interaction
+Development repository interation with the Spotify API. This API allows users to few information about me (within a certain scope) without being an authenticated user.
 
 # Starting
 Run `npm start` to begin the server. The server will adapt to it's environment with various configurations (dev vs prod)
