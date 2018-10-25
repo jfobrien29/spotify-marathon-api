@@ -3,25 +3,49 @@ import { config } from '../config';
 import { songReviews } from '../config/SongReviews';
 import SpotifyHelper from '../gateways/SpotifyGateway';
 const request = require('request-promise-native');
+const msCacheSession = 10000;
 
 export class SpotifyService {
-
     /**************************************************************
      * Query Services
      *************************************************************/
 
     async getSessionData(auth): Promise<any> {
-        const response = await SpotifyHelper.getCurrentlyPlaying(auth);
-        if (!response) {
-            return {isPlaying: false};
+        let data;
+
+        if (this.cacheSessionIsValid()) {
+            logger.info('Using Cached Data!')
+            data = config.CachedSession.data;
         }
         else {
-            const data = JSON.parse(response);
-            const reviewData = songReviews[data.item.id];
-            data.review = (reviewData) ? reviewData.review : '';
-            data.isPlaying = true;
-            return data;
+            logger.info('Retrieving new session!')
+
+            const response = await SpotifyHelper.getCurrentlyPlaying(auth);
+            config.CachedSession.time = (new Date()).getTime();
+            if (!response) {
+                data = { isPlaying: false };
+                config.CachedSession.data = { isPlaying: false };
+            }
+            else {
+                data = JSON.parse(response);
+                const reviewData = songReviews[data.item.id];
+                data.review = (reviewData) ? reviewData.review : '';
+                data.isPlaying = true;
+                config.CachedSession.data = data;
+            }
+
         }
+
+        return data;
+    }
+
+    cacheSessionIsValid(): boolean {
+        logger.info((new Date()).getTime() - config.CachedSession.time);
+        return ((new Date()).getTime() - config.CachedSession.time) < msCacheSession;
+    }
+
+    async retrieveData(auth){
+
     }
 
     async getSession(auth): Promise<any> {

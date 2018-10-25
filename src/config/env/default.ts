@@ -14,7 +14,8 @@ const config = {
         PASSWORD: process.env.DB_PASSWORD || 'password'
     },
     SPOTIFY_CLIENT_ID: process.env.CLIENT_ID || 'N/A',
-    SPOTIFY_CLIENT_SECRET: process.env.CLIENT_SECRET || 'N/A'
+    SPOTIFY_CLIENT_SECRET: process.env.CLIENT_SECRET || 'N/A',
+    CachedSession: { time: 0, data: {}}
 };
 
 export { config as defaultConfig };
