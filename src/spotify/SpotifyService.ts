@@ -1,6 +1,6 @@
 import { logger } from '../config/logger';
 import { config } from '../config';
-import { songReviews } from './SongReviews';
+import { songReviews } from '../config/SongReviews';
 import SpotifyHelper from '../gateways/SpotifyGateway';
 const request = require('request-promise-native');
 
