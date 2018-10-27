@@ -33,7 +33,6 @@ export class SpotifyService {
                 data.isPlaying = true;
                 config.CachedSession.data = data;
             }
-
         }
 
         return data;
@@ -41,7 +40,7 @@ export class SpotifyService {
 
     cacheSessionIsValid(): boolean {
         logger.info((new Date()).getTime() - config.CachedSession.time);
-        return ((new Date()).getTime() - config.CachedSession.time) < msCacheSession;
+        return ((new Date()).getTime() - config.CachedSession.time) < config.CACHE_TIME_MS;
     }
 
     async retrieveData(auth){

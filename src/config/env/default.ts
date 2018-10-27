@@ -15,6 +15,7 @@ const config = {
     },
     SPOTIFY_CLIENT_ID: process.env.CLIENT_ID || 'N/A',
     SPOTIFY_CLIENT_SECRET: process.env.CLIENT_SECRET || 'N/A',
+    CACHE_TIME_MS: process.env.CACHE_TIME_MS || 10000,
     CachedSession: { time: 0, data: {}}
 };
 
