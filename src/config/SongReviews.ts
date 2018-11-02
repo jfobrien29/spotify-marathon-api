@@ -12,7 +12,7 @@ const songReviews = {
     '24LS4lQShWyixJ0ZrJXfJ5': { 'name': 'Sweet Nothing (feat. Florence Welch)', 'review': 'Calvin Harris never goes out of style.' },
     '0LIU3eOAwXCZlWOiHuItkj': { 'name': 'Help Our Souls (Urban Contact Radio Edit)', 'review': 'Smooth smooth, techno jam. Old locker room jam.' },
     '3Vf9mxFMad7VR3G10QZwia': { 'name': 'Free (feat. Emeli Sandé) - Cash Cash x Gazzo Remix', 'review': 'Reminds me of losing my mind freshman year 2014.' },
-    '4XLm8FNvaTlmTAZmSrrV82': { 'name': 'Shots - Broiler Remix', 'review': 'Insirpation, song form. Deep credit to @Spaz.' },
+    '4XLm8FNvaTlmTAZmSrrV82': { 'name': 'Shots - Broiler Remix', 'review': 'Inspiration, song form. Deep song find credit to @Spaz.' },
     '2Kl1E3NdbzT7vVi93TffoX': { 'name': 'Pompeii - Audien Remix', 'review': 'Talk about a fire remix! (This is an educated volcano joke)' },
     '57rhFcwEY1MTo3jx2af8Qk': { 'name': 'Make Me Feel', 'review': 'Make me feel looooooove!!!' },
     '3uJsg8xIH7OpWHxuJaMLJX': { 'name': 'Ride Or Die (feat. Foster The People)', 'review': 'Just great vibes, top 5 song of the last few months. Fight me.' },
@@ -55,7 +55,12 @@ const songReviews = {
     '1RNybormZ5O0s3DCIRQWq4': { 'name': 'Bright Blue Day Haze', 'review': 'Yup yup that\'ll do it. Great guitar.' },
     '739wgqW608GZoyfLHFLsPy': { 'name': 'Leave It In My Dreams', 'review': 'The Voidz are a funky band, but this song textbook groovy!' },
     '7jFuj6FV32pOgf0WU9t6bM': { 'name': 'King - Basic Tape Remix', 'review': 'I thought the lyrics were "treat you like a kid" for a very, very long time.' },
-    '2MTSo2SGQ0oVKgPu99x3Df': { 'name': 'Dopamine', 'review': 'Bursting at the seams with dopamine. ' }
+    '2MTSo2SGQ0oVKgPu99x3Df': { 'name': 'Dopamine', 'review': 'Bursting at the seams with dopamine.' },
+    '0LO7f7ZJg871B8hLTRzrfB': { 'name': 'Julia', 'review': 'Goddam I love this song so much.' },
+    '1vvNmPOiUuyCbgWmtc6yfm': { 'name': 'My Way', 'review': 'From Genius Lyrics: "Tropical anthem about getting away from anything holding you back".' },
+    '4VO1K5TsBbx8Zzu8052slF': { 'name': 'Turn Me Up', 'review': 'Intensity, around 1:00 I\'m reeeeeeally feelin it.' },
+    '7hrDA2n8BVGLyHra0rBiFd': { 'name': 'Younger - Kygo Remix', 'review': 'In the words of Alexander Lee, no one ever said play less Kygo.' },
+    '6NSjdFYF2zxgQ7UvsKoRxy': { 'name': 'Jackpot', 'review': 'If you\'re reading this... sup? Want to hit the Jackpot?' }
 };
 
 export { songReviews };
